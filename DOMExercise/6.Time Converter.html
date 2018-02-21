@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time Converter</title>
+    <style>
+        label, input {
+            display: inline-block;
+            width: 5em;
+        }
+        label {
+            text-align: right;
+        }
+    </style>
+</head>
+<body onload="attachEventsListeners()">
+<h1>Time Converter</h1>
+<div>
+    <label for="days">Days: </label>
+    <input type="text" id="days">
+    <input id="daysBtn" type="button" value="Convert">
+</div>
+<div>
+    <label for="hours">Hours: </label>
+    <input type="text" id="hours">
+    <input id="hoursBtn" type="button" value="Convert">
+</div>
+<div>
+    <label for="minutes">Minutes: </label>
+    <input type="text" id="minutes">
+    <input id="minutesBtn" type="button" value="Convert">
+</div>
+<div>
+    <label for="seconds">Seconds: </label>
+    <input type="text" id="seconds">
+    <input id="secondsBtn" type="button" value="Convert">
+</div>
+<script>
+    function attachEventsListeners() {
+        let daysInput = document.getElementById("days");
+        let hoursInput = document.getElementById("hours");
+        let minutesInput = document.getElementById("minutes");
+        let secondsInput = document.getElementById("seconds");
+
+        let buttons = document.querySelectorAll("input[id$='Btn']");
+        for (let button of buttons) {
+            button.addEventListener("click", convertTime);
+        }
+
+        function convertTime() {
+            let seconds = 0;
+            switch (this.id) {
+                case "daysBtn":
+                    seconds = Number(daysInput.value) * 86400;
+                    break;
+
+                case "hoursBtn":
+                    seconds = Number(hoursInput.value) * 3600;
+                    break;
+
+                case "minutesBtn":
+                    seconds = Number(minutesInput.value) * 60;
+                    break;
+
+                case "secondsBtn":
+                    seconds = Number(secondsInput.value);
+                    break;
+            }
+            daysInput.value = seconds / 86400;
+            hoursInput.value = seconds / 3600;
+            minutesInput.value = seconds / 60;
+            secondsInput.value = seconds;
+        }
+    }
+</script>
+</body>
+</html>
