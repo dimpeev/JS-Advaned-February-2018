@@ -6,7 +6,8 @@ function domSearch(selector, isCaseSensitive) {
         let elementValue = $(".add-controls label input").val();
         let list = $(".result-controls ul");
 
-        let item = $("<li>")
+        $("<li>")
+            .addClass("list-item")
             .append($("<a>")
                 .addClass("button")
                 .text("X")
@@ -37,7 +38,7 @@ function domSearch(selector, isCaseSensitive) {
         if(searchValue === "") {
             allItems
                 .parent()
-                .css("display", "");
+                .removeAttr("style")
             return;
         }
 
@@ -46,7 +47,7 @@ function domSearch(selector, isCaseSensitive) {
         $(allItems)
             .filter((index, element) => searchRegex.test(element.textContent))
             .parent()
-            .css("display", "");
+            .removeAttr("style");
     }
 
     function generateHTML() {
