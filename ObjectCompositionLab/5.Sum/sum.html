@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.Sum</title>
+</head>
+<body>
+<input type="text" id="num1" value="0"/>
+<input type="text" id="num2" value="5"/>
+<input type="text" id="result" readonly/>
+<br>
+<button id="sumButton">
+    Sum
+</button>
+<button id="subtractButton">
+    Subtract
+</button>
+<script>
+    function getModel() {
+        let num1, num2, result;
+
+        function init(num1Sel, num2Sel, resultSel) {
+            num1 = document.getElementById(num1Sel.slice(1));
+            num2 = document.getElementById(num2Sel.slice(1));
+            result = document.getElementById(resultSel.slice(1));
+        }
+
+        function add() {
+            update((a, b) => a + b);
+        }
+        function subtract() {
+            update((a, b) => a - b);
+        }
+
+        function update(operation) {
+            let val1 = Number(num1.value);
+            let val2 = Number(num2.value);
+            result.value = operation(val1, val2);
+        }
+
+        return {init, add, subtract};
+    }
+
+    (function() {
+        let model = getModel();
+        model.init('#num1', '#num2', '#result');
+        document.getElementById("sumButton").addEventListener("click", model.add);
+        document.getElementById("subtractButton").addEventListener("click", model.subtract);
+    }());
+</script>
+</body>
+</html>
